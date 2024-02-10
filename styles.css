@@ -1,9 +1,9 @@
+/* Logged in Styles */
 .logged-in .editable-block {
     border: 2px solid #4a90e2; /* Example: blue border for editable blocks */
     position: relative;
     padding: 10px;
     margin-bottom: 20px;
-    background-color: #f7f7f7; /* Light background to indicate editability */
 }
 
 .logged-in .editable-block::before {
@@ -25,6 +25,104 @@
 
 
 
+
+/* Navbar Styles */
+.navbar {
+    background-color: #fff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 10px 0; /* Adjust the vertical padding to match the screenshot */
+}
+
+.navbar-brand img {
+    height: 40px; /* Adjust the logo height as necessary */
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url("path_to_your_toggler_icon.png"); /* Replace with your custom icon path if needed */
+}
+
+.navbar-nav .nav-link {
+    color: #333; /* Dark grey color for the links */
+    margin-right: 15px; /* Space between nav items */
+}
+
+.navbar-nav .nav-link.active {
+    color: #0056b3; /* Highlight color for the active page */
+}
+
+.navbar-nav .dropdown-menu {
+    border: 0; /* Remove default border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for dropdown */
+}
+
+.btn-outline-primary {
+    border-color: #0056b3; /* Match the button border to the highlight color */
+    color: #0056b3; /* Match the button text to the highlight color */
+}
+
+.btn-outline-primary:hover {
+    background-color: #0056b3; /* Highlight background color on hover */
+    color: #fff; /* White text on hover */
+}
+
+/* Adjust breakpoint for navbar collapse */
+@media (max-width: 992px) {
+    .navbar-expand-lg {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    .navbar-collapse {
+        display: flex !important; /* Force display flex for collapse */
+    }
+}
+
+
+/* Homepage Styles */
 body.pg_1 {
     background: #f8f9fa;
+}
+.jumbotron {
+    padding: 4rem 2rem; /* This adds padding above and below the text */
+    margin-bottom: 0; /* Removes the margin below the jumbotron if any */
+}
+
+/* If you want to adjust the title and paragraph specifically, you can use: */
+.jumbotron .display-4 {
+    font-size: 2.5rem; /* Adjust as necessary */
+    color: #333; /* Color for the title */
+}
+
+.jumbotron .lead {
+    font-size: 1.25rem; /* Adjust as necessary */
+    color: #666; /* Color for the paragraph */
+}
+
+.img-fluid {
+    margin-bottom: 30px; /* Adjust the space between images */
+}
+body.pg_1 .co-found-section {
+    text-align: center; /* Center align the section */  
+    
+}
+
+/* Override Bootstrap column padding */
+body.pg_1 .row > [class^='col-'] {
+    padding-right: 6px; /* Reduce right padding */
+    padding-left: 6px; /* Reduce left padding */
+}
+
+/* Ensure images don't exceed the modified column width */
+body.pg_1 .img-fluid {
+    width: 100%;
+    height: auto;
+    display: block; /* remove any extra space below the image */
+}
+
+body.pg_1 .ic_sec i{
+    color: #0056b3; 
 }
