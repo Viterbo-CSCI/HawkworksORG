@@ -1,0 +1,30 @@
+.logged-in .editable-block {
+    border: 2px solid #4a90e2; /* Example: blue border for editable blocks */
+    position: relative;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #f7f7f7; /* Light background to indicate editability */
+}
+
+.logged-in .editable-block::before {
+    content: 'Edit Mode'; /* Add a label to indicate edit mode */
+    position: absolute;
+    top: -1em;
+    left: 10px;
+    background: #4a90e2;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.75em;
+}
+
+.logged-in .editable-block button {
+    display: block; /* Ensure the button is always visible */
+    margin-top: 10px;
+}
+
+
+
+body.pg_1 {
+    background: #f8f9fa;
+}
