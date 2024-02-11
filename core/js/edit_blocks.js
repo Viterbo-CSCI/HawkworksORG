@@ -1,57 +1,104 @@
 $(document).ready(function() {
-    // Event delegation for edit buttons
+    // Handle edit button click events
     $(document).on('click', '.edit-btn', function() {
         var blockId = $(this).data('block-id');
-        var type = $(this).data('type') || 'text'; // Default to 'text' if type is undefined
-        editBlock(blockId, type);
+        var type = $(this).data('type') || 'text';
+        if (type === 'image') {
+            editImageBlock(blockId);
+        } else {
+            editTextBlock(blockId);
+        }
     });
 
-    // Function to handle editing blocks
-    function editBlock(blockId, type = 'text') {
-        if (type === 'image') {
-            // Open the modal for image upload and set blockId for reference
+    // Function to handle image block edits
+    function editImageBlock(blockId) {
+        fetchBlockImages(blockId, function(images) {
+            populateModalWithImages(images);
             $('#imageUploadModal').modal('show');
             $('#modalSaveImage').data('block-id', blockId);
-        } else {
-            // Handle text/HTML editing with CKEditor
-            var contentDiv = $('#block_' + blockId + ' .content');
-            var originalContent = contentDiv.html(); // Preserve the original content
-            contentDiv.empty(); // Clear the content
-
-            // Append a textarea and replace it with CKEditor
-            var textareaId = 'editor_' + blockId;
-            $('<textarea>', { id: textareaId }).val(originalContent).appendTo(contentDiv);
-            if (CKEDITOR.instances[textareaId]) {
-                CKEDITOR.instances[textareaId].destroy();
-            }
-            CKEDITOR.replace(textareaId, {
-                // Your CKEditor config goes here
-            });
-
-            // Append the save button for CKEditor content
-            $('<button>').addClass('btn btn-success mt-2').text('Save').on('click', function() {
-                saveBlock(blockId);
-            }).appendTo(contentDiv);
-        }
+        });
     }
 
-    // Save function for CKEditor content
-    function saveBlock(blockId) {
-        var editorInstance = CKEDITOR.instances['editor_' + blockId];
-        var editorData = editorInstance.getData();
+    // Function to handle text block edits
+    function editTextBlock(blockId) {
+        var contentDiv = $('#block_' + blockId + ' .content');
+        var originalContent = contentDiv.html();
 
+        // Clear existing content and setup textarea for CKEditor
+        contentDiv.empty();
+        var textareaId = 'editor_' + blockId;
+        var textarea = $('<textarea>', { id: textareaId, html: originalContent }).appendTo(contentDiv);
+
+        // Initialize CKEditor
+        if (CKEDITOR.instances[textareaId]) {
+            CKEDITOR.instances[textareaId].destroy();
+        }
+        CKEDITOR.replace(textareaId, {
+            filebrowserUploadUrl: '/core/upload_handler.php',
+            filebrowserUploadMethod: 'form'
+        });
+
+
+        // Setup save button for CKEditor content
+        $('<button>', {
+            text: 'Save',
+            click: function() { saveTextBlock(blockId); }
+        }).appendTo(contentDiv);
+    }
+
+    // AJAX function to fetch block images
+    function fetchBlockImages(blockId, callback) {
+        $.ajax({
+            url: '/core/fetch_block_images.php',
+            type: 'GET',
+            data: { block_id: blockId },
+            dataType: 'json',
+            success: function(response) {
+                if (response.success && Array.isArray(response.images)) {
+                    callback(response.images);
+                } else {
+                    alert('No images found or error fetching images.');
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('Error fetching images: ' + error);
+            }
+        });
+    }
+        function populateModalWithImages(images) {
+        var modalBody = $('#imageUploadModal .modal-body');
+        modalBody.empty(); // Clear previous contents
+
+        images.forEach(function(image, index) {
+            var imageContainer = $('<div>', { class: 'image-container mb-3' }).appendTo(modalBody);
+            
+            $('<img>', {
+                src: image.url,
+                class: 'img-thumbnail mb-2',
+                alt: 'Image ' + (index + 1)
+            }).appendTo(imageContainer);
+
+            $('<input>', {
+                type: 'file',
+                class: 'form-control',
+                'data-image-id': image.id // Or any identifier you have for the image
+            }).appendTo(imageContainer);
+        });
+    }
+
+
+    // Function to save CKEditor content
+    function saveTextBlock(blockId) {
+        var editorData = CKEDITOR.instances['editor_' + blockId].getData();
         $.ajax({
             url: '/core/save_block_content.php',
             type: 'POST',
-            data: {
-                block_id: blockId,
-                content: editorData
-            },
+            data: { block_id: blockId, content: editorData },
             dataType: 'json',
             success: function(response) {
                 if (response.success) {
-                    // Reload the page or update the content dynamically
-                    location.reload();
+                    alert('Content updated successfully.');
+                    location.reload(); // Optionally, dynamically update the content
                 } else {
                     alert('Error saving content: ' + response.message);
                 }
@@ -62,24 +109,31 @@ $(document).ready(function() {
         });
     }
 
-    // Save function for image uploads
+    // Save image block function remains unchanged
     $('#modalSaveImage').click(function() {
-        var blockId = $(this).data('block-id');
-        saveImageBlock(blockId);
+        saveImageBlock($(this).data('block-id'));
     });
 
     function saveImageBlock(blockId) {
-        var fileInput = $('#modalImageUpload');
-        if (fileInput[0].files.length === 0) {
-            alert('Please select at least one image file to upload.');
+        var formData = new FormData();
+        var hasFilesToUpload = false;
+    
+        $('#imageUploadModal .image-container input[type="file"]').each(function() {
+            if (this.files.length > 0) {
+                formData.append('replacement_images[]', this.files[0]); // Append the selected file
+                formData.append('content_ids[]', $(this).data('content-id')); // Correctly access the data attribute
+
+                hasFilesToUpload = true;
+            }
+        });
+    
+        if (!hasFilesToUpload) {
+            alert('Please select at least one image file to upload or replace.');
             return;
         }
-        var formData = new FormData();
-        $.each(fileInput[0].files, function(i, file) {
-            formData.append('images[]', file);
-        });
+    
         formData.append('block_id', blockId);
-
+    
         $.ajax({
             url: '/core/save_block_content_multiple_images.php',
             type: 'POST',
@@ -89,19 +143,18 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(response) {
                 if (response.success) {
-                    // Update the page content or reload the page
-                    location.reload();
+                    alert('Images uploaded/replaced successfully.');
+                    location.reload(); // Or update the UI to reflect the changes
                 } else {
-                    alert('Error uploading images: ' + response.message);
+                    alert('Error uploading/replacing images: ' + response.message);
                 }
             },
             error: function(xhr, status, error) {
-                alert('Error uploading images: ' + error);
+                alert('Error uploading/replacing images: ' + error);
             }
         });
-
+    
         // Clear the input and hide the modal after upload
-        fileInput.val('');
         $('#imageUploadModal').modal('hide');
     }
 });

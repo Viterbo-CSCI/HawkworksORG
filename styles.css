@@ -1,3 +1,19 @@
+body {
+    font-family: 'Roboto', sans-serif; /* Modern, clean font for body */
+    font-size: 16px; /* Base font size */
+    line-height: 1.6; /* Line height for readability */
+    color: #333; /* Default text color */
+    background-color: #f8f9fa; /* Light background color */
+}
+
+
+/* Heading Styles */
+h1, h2, h3 {
+    font-family: 'Latto', Helvetica; /* Stylish, modern font for headings */
+    font-weight: 500; /* Bold font weight for headings */
+}
+
+
 /* Logged in Styles */
 .logged-in .editable-block {
     border: 2px solid #4a90e2; /* Example: blue border for editable blocks */
@@ -85,10 +101,13 @@
 /* Homepage Styles */
 body.pg_1 {
     background: #f8f9fa;
+    background-color: #f2f2f2!important;
 }
 .jumbotron {
     padding: 4rem 2rem; /* This adds padding above and below the text */
+    
     margin-bottom: 0; /* Removes the margin below the jumbotron if any */
+    background-color: #f2f2f2!important;
 }
 
 /* If you want to adjust the title and paragraph specifically, you can use: */
@@ -100,6 +119,7 @@ body.pg_1 {
 .jumbotron .lead {
     font-size: 1.25rem; /* Adjust as necessary */
     color: #666; /* Color for the paragraph */
+    
 }
 
 .img-fluid {
@@ -125,4 +145,339 @@ body.pg_1 .img-fluid {
 
 body.pg_1 .ic_sec i{
     color: #0056b3; 
+}
+
+#imageUploadModal .img-thumbnail {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+/* Footer Styles */
+/* Logged in Styles */
+.logged-in .editable-block {
+    border: 2px solid #4a90e2; /* Example: blue border for editable blocks */
+    position: relative;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.logged-in .editable-block::before {
+    content: 'Edit Mode'; /* Add a label to indicate edit mode */
+    position: absolute;
+    top: -1em;
+    left: 10px;
+    background: #4a90e2;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.75em;
+}
+
+.logged-in .editable-block button {
+    display: block; /* Ensure the button is always visible */
+    margin-top: 10px;
+}
+
+
+
+
+/* Navbar Styles */
+.navbar {
+    background-color: #fff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 10px 0; /* Adjust the vertical padding to match the screenshot */
+}
+
+.navbar-brand img {
+    height: 40px; /* Adjust the logo height as necessary */
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url("path_to_your_toggler_icon.png"); /* Replace with your custom icon path if needed */
+}
+
+.navbar-nav .nav-link {
+    color: #333; /* Dark grey color for the links */
+    margin-right: 15px; /* Space between nav items */
+}
+
+.navbar-nav .nav-link.active {
+    color: #0056b3; /* Highlight color for the active page */
+}
+
+.navbar-nav .dropdown-menu {
+    border: 0; /* Remove default border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for dropdown */
+}
+
+.btn-outline-primary {
+    border-color: #0056b3; /* Match the button border to the highlight color */
+    color: #0056b3; /* Match the button text to the highlight color */
+}
+
+.btn-outline-primary:hover {
+    background-color: #0056b3; /* Highlight background color on hover */
+    color: #fff; /* White text on hover */
+}
+
+/* Adjust breakpoint for navbar collapse */
+@media (max-width: 992px) {
+    .navbar-expand-lg {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    .navbar-collapse {
+        display: flex !important; /* Force display flex for collapse */
+    }
+}
+
+
+/* Homepage Styles */
+body.pg_1 {
+    background: #f8f9fa;
+    background-color: #f2f2f2!important;
+}
+.jumbotron {
+    padding: 4rem 2rem; /* This adds padding above and below the text */
+    margin-bottom: 0; /* Removes the margin below the jumbotron if any */
+    background-color: #f2f2f2!important;
+}
+
+/* If you want to adjust the title and paragraph specifically, you can use: */
+.jumbotron .display-4 {
+    font-size: 2.5rem; /* Adjust as necessary */
+    color: #333; /* Color for the title */
+}
+
+.jumbotron .lead {
+    font-size: 1.25rem; /* Adjust as necessary */
+    color: #666; /* Color for the paragraph */
+    
+}
+
+.img-fluid {
+    margin-bottom: 30px; /* Adjust the space between images */
+}
+body.pg_1 .co-found-section {
+    text-align: center; /* Center align the section */  
+    
+}
+
+/* Override Bootstrap column padding */
+body.pg_1 .row > [class^='col-'] {
+    padding-right: 6px; /* Reduce right padding */
+    padding-left: 6px; /* Reduce left padding */
+}
+
+/* Ensure images don't exceed the modified column width */
+body.pg_1 .img-fluid {
+    width: 100%;
+    height: auto;
+    display: block; /* remove any extra space below the image */
+}
+
+body.pg_1 .ic_sec i{
+    color: #0056b3; 
+}
+
+#imageUploadModal .img-thumbnail {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+    
+}
+
+
+
+.contact-button {
+    background-color: black; /* Blue background */
+    border: 2px solid gray;/* Remove border */
+    color: white; /* White text */
+    padding: 10px 20px; /* Top/bottom padding of 10px, left/right padding of 20px */
+    text-transform: uppercase; /* Uppercase text */
+    border-radius: 20px; /* Rounded corners with a radius of 20px */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    font-weight: bold; /* Bold font */
+    font-size: 0.9rem; /* Font size of 0.9rem */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for background color and shadow */
+}
+
+.contact-button:hover {
+    background-color: #0056b3; /* Darker blue background on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+
+
+.jumbotron {
+    padding: 4rem 2rem; /* Increase top and bottom padding */
+    background-color: #f2f2f2; /* Adjust background color if needed */
+    /* Other styles */
+}
+
+.jumbotron .display-4 {
+    font-size: 3rem; /* Increase the font size for larger displays */
+    margin-bottom: 2rem; /* Add more space below the title */
+    /* Other styles */
+}
+
+.jumbotron .lead {
+    font-size: 1.5rem; /* Increase the font size for the subtitle */
+    /* Other styles */
+}
+
+
+
+/* Section with increased padding */
+.large-sec {
+    padding: 5rem 2rem; /* Top and bottom padding */
+    margin: 0 1rem; /* Adds margin to the left and right for more space */
+    background-color: #0056b3; /* Example background color */
+    color: white; /* Text color */
+}
+
+.large-sec .content {
+    font-size: 1.25rem; /* Increase font size */
+    max-width: 800px; /* Maximum width of the content */
+    margin: 0 auto; /* Centers the content block */
+    padding: 2rem; /* Padding inside the content block */
+}
+
+.content {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+
+.large-sec .edit-btn {
+    padding: 0.5rem 1rem; /* Padding for the button */
+    margin-top: 1rem; /* Space above the button */
+    background-color: #f8f9fa; /* Button background color */
+    border: none; /* Removes the border */
+    border-radius: 0.3rem; /* Rounded corners for the button */
+    color: #333; /* Button text color */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.large-sec .edit-btn:hover {
+    background-color: #e7e7e7; /* Button hover background color */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .large-sec {
+        padding: 3rem 1rem; /* Reduced top and bottom padding on smaller screens */
+    }
+    
+    .large-sec .content {
+        padding: 1rem; /* Reduced padding inside the content block on smaller screens */
+    }
+}
+
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Animation for floating shape */
+@keyframes floatShape {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+
+  .wave-container {
+    position: relative;
+    overflow: hidden; /* Ensure SVG doesn't overflow */
+  }
+  
+  .wave-svg {
+    display: block;
+    position: absolute;
+    top: -1px; /* Adjust this to align the wave as needed */
+    width: 100%;
+    height: auto;
+    z-index: 10;
+    animation: moveWave 10s linear infinite; /* Animation for moving wave */
+  }
+  
+  @keyframes moveWave {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100px); /* Adjust as per the wave pattern */
+    }
+  }
+  
+  /* Adjust the wave container height if necessary */
+  .wave-container::after {
+    content: "";
+    display: block;
+    height: 150px; /* Height of the wave */
+  }
+  
+.animated-color {
+    background-image: linear-gradient(-45deg, #0056b3, #000000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: animateGradient 3s infinite linear alternate;
+}
+@keyframes animateGradient {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+.section-wrapper {
+    position: relative;
+}
+
+.section-wrapper {
+    position: relative;
+}
+
+.overlay-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%; /* Set height to cover the entire section */
+    top: 50%; /* Position the SVG vertically in the middle */
+    transform: translateY(-50%); /* Center the SVG vertically */
+    left: 0;
+    /*z-index: -1; /* Ensure the SVG is behind the content */
+}
+
+.position-relative {
+    position: relative;
+}
+
+.position-upper-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.position-upper-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 999; /* Adjust the z-index value as needed */
 }
