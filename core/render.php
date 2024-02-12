@@ -2,6 +2,27 @@
 // render.php
 include 'db.php'; // This will provide the $conn PDO object
 
+function render_title($blockId) {
+    global $conn; // Use the global database connection variable
+
+    // Prepare the statement to fetch the title content
+    $stmt = $conn->prepare("
+        SELECT bc.title
+        FROM blocks bl
+        JOIN block_contents bc ON bl.id = bc.block_id
+        WHERE bl.id = ? LIMIT 1
+    ");
+    $stmt->execute([$blockId]);
+    $titleContent = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$titleContent) {
+        return ''; // Title does not exist or no content
+    }
+
+    // Return the title
+    return htmlspecialchars($titleContent['title']);
+}
+
 function render_block($blockId) {
     global $conn; // Use the global database connection variable
     

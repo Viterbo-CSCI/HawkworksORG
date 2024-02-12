@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 require 'core/config.php';
 ini_set('display_errors', 1);
 require 'core/db.php'; // Adjust to use your actual database connection setup

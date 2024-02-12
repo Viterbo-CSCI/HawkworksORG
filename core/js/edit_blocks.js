@@ -9,6 +9,7 @@ $(document).ready(function() {
             editTextBlock(blockId);
         }
     });
+    
 
     // Function to handle image block edits
     function editImageBlock(blockId) {
@@ -35,7 +36,14 @@ $(document).ready(function() {
         }
         CKEDITOR.replace(textareaId, {
             filebrowserUploadUrl: '/core/upload_handler.php',
-            filebrowserUploadMethod: 'form'
+            filebrowserUploadMethod: 'form',
+            stylesSet: [
+                /* Define a style named "Accent Text" */
+                { name: 'Accent Text', element: 'span', attributes: { 'class': 'accent-text' } },
+                /* Define a style named "Button" for links */
+                { name: 'Blue Button', element: 'a', attributes: { 'class': 'btn btn-primary' } }
+                // You can add more custom styles here
+            ],
         });
 
 
@@ -45,6 +53,30 @@ $(document).ready(function() {
             click: function() { saveTextBlock(blockId); }
         }).appendTo(contentDiv);
     }
+
+    function update_title(blockId, titleContent) {
+        $.ajax({
+            url: 'update_title.php', // The PHP file that processes the update
+            type: 'POST',
+            dataType: 'json', // Expecting JSON response
+            data: {
+                blockId: blockId,
+                title: titleContent // Send the title content as part of the request
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert('Title updated successfully.');
+                    // Optionally, refresh the page or update the UI as needed
+                } else {
+                    alert('Error updating title: ' + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('An error occurred: ' + error);
+            }
+        });
+    }
+    
 
     // AJAX function to fetch block images
     function fetchBlockImages(blockId, callback) {

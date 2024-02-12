@@ -26,39 +26,10 @@ $infoBlockId = 6; // The block ID for the basic information area
 
 </head>
 <body class="<?php echo $editMode ? 'logged-in' : ''; ?> pg_1">
+<?php
+require_once 'header.php';
+?>
 
-
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="path_to_your_logo.png" alt="Logo" style="height: 40px;"> <!-- Replace with your logo path -->
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Launch Factory
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-                <!-- Add more nav-item here as needed -->
-            </ul>
-            <?php if ($editMode): ?>
-                <a href="logout.php" class="btn btn-outline-primary">Logout</a>
-            <?php endif; ?>
-        </div>
-    </div>
-</nav>
 
 <div class="jumbotron bg-white text-center">
     <h1 class="display-4">Empowering Innovation with HAWK WORKS</h1>
@@ -104,13 +75,13 @@ $infoBlockId = 6; // The block ID for the basic information area
 </div>
 <div class="section-wrapper">
     <!-- Co-Found With Us Section -->
-    <div class="co-found-section2 large_sec text-center text-white py-5" style="background-color: #0056b3;">
+    <div class="co-found-section large_sec text-center text-white py-5" style="background-color: #0056b3;">
         <div class="container">
             <!-- Basic Information Area -->
             <div id="block_<?php echo $infoBlockId; ?>" class="editable-block position-relative">
                 <div class="content"><?php echo htmlspecialchars_decode(render_block($infoBlockId, $conn)); ?></div>
                 <?php if ($editMode): ?>
-                    <button class="edit-btn fr position-upper-right" data-block-id="<?php echo $infoBlockId; ?>" data-type="text">Edit</button>
+                    <button class="edit-btn fr position-upper-right"" data-block-id="<?php echo $infoBlockId; ?>" data-type="text">Edit</button>
                 <?php endif; ?>
             </div>
         </div>
@@ -132,64 +103,6 @@ $infoBlockId = 6; // The block ID for the basic information area
 
 
 </div>
-<footer class="footer bg-dark text-white py-4">
-    <div class="container">
-        <div class="row">
-            <!-- Logo and Privacy Policy -->
-            <div class="col-md-4 footer-brand align-self-center">
-                <img src="path_to_your_logo.png" alt="Launch Factory Logo" class="mb-2">
-                <p>Privacy Policy</p>
-                <p>Copyright ©2024 Launch Factory</p>
-            </div>
-            <!-- Menu -->
-            <div class="col-md-3 footer-nav">
-                <h5 class="text-uppercase mb-4">Menu</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">Home</a></li>
-                    <li><a href="#" class="text-white">About Us</a></li>
-                    <li><a href="#" class="text-white">Join Our Newsletter</a></li>
-                    <li><a href="#" class="text-white">Founder in Residence</a></li>
-                </ul>
-            </div>
-            <!-- Social Media -->
-            <div class="col-md-3 footer-social">
-                <h5 class="text-uppercase mb-4">Social Media</h5>
-                <a href="link_to_facebook" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
-                <a href="link_to_linkedin" class="text-white me-2"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            <!-- Contact Button -->
-            <div class="col-md-2 footer-contact align-self-center">
-                <button class="btn btn-primary contact-button">Contact Us</button>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
-<!-- Modal -->
-<div class="modal fade" id="imageUploadModal" tabindex="-1" aria-labelledby="imageUploadModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="imageUploadModalLabel">Upload Image</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <input type="file" id="modalImageUpload" multiple>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="modalSaveImage">Upload Image</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
-<script src="main.js"></script>
-<script src="core/js/edit_blocks.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?php
+require_once 'footer.php';
+?>

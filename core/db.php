@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Database configuration
 $host = 'localhost'; // or your database host, e.g., a remote server
 $dbname = 'mydatabase'; // your database name

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://localhost/edit_menus.php -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Menu Editor</title>
+    <link rel="stylesheet" href="./Menu Editor_files/jquery.nestable.min.css">
+    <script src="./Menu Editor_files/jquery-3.6.0.min.js"></script>
+    <script src="./Menu Editor_files/jquery.nestable.min.js"></script>
+    <style>
+        .dd { max-width: 600px; }
+        .dd-handle { display: block; height: 30px; line-height: 30px; }
+    </style>
+<link rel="stylesheet" type="text/css" href="chrome-extension://bbpokcagpggnekcmamgdieebhpkjmljm/css/fonts.css"></head>
+<body>
+
+<form method="post" action="http://localhost/edit_menus.php">
+    <label for="menu-select">Choose a menu to edit:</label>
+    <select name="menu_id" id="menu-select">
+                    <option value="1">Main Menu</option>
+            </select>
+    <button type="submit" name="load_menu">Load Menu</button>
+</form>
+
+
+    <div class="dd" id="nestable">
+        <ol class="dd-list"><li class="dd-item" data-id="1"><div class="dd-handle"><input type="text" name="title[1]" value="Home" placeholder="Title"><input type="text" name="url[1]" value="/home" placeholder="URL"><button type="button" class="delete-item">Delete</button></div></li><li class="dd-item" data-id="2"><button class="dd-collapse" data-action="collapse" type="button">Collapse</button><button class="dd-expand" data-action="expand" type="button">Expand</button><div class="dd-handle"><input type="text" name="title[2]" value="Works" placeholder="Title"><input type="text" name="url[2]" value="/works" placeholder="URL"><button type="button" class="delete-item">Delete</button></div><ol class="dd-list"><li class="dd-item" data-id="3"><div class="dd-handle"><input type="text" name="title[3]" value="Tri-shaw" placeholder="Title"><input type="text" name="url[3]" value="/tri-shaw" placeholder="URL"><button type="button" class="delete-item">Delete</button></div></li><li class="dd-item" data-id="4"><div class="dd-handle"><input type="text" name="title[4]" value="Hawkworksconnect" placeholder="Title"><input type="text" name="url[4]" value="/hawkworksconnect" placeholder="URL"><button type="button" class="delete-item">Delete</button></div></li><li class="dd-item" data-id="5"><div class="dd-handle"><input type="text" name="title[5]" value="Reagenting" placeholder="Title"><input type="text" name="url[5]" value="/reagenting" placeholder="URL"><button type="button" class="delete-item">Delete</button></div></li><li class="dd-item" data-id="6"><div class="dd-handle"><input type="text" name="title[6]" value="Backpacks" placeholder="Title"><input type="text" name="url[6]" value="/backpacks" placeholder="URL"><button type="button" class="delete-item">Delete</button></div></li></ol><button type="button" class="add-item">Add Item</button></li></ol><button type="button" class="add-item">Add Item</button>    </div>
+    <button type="button" class="save-btn">Save Menu</button> <!-- Save button added -->
+
+<script>
+$(document).ready(function() {
+    $('#nestable').nestable();
+
+    // Delete item event
+    $(document).on('click', '.delete-item', function(e) {
+        e.preventDefault();
+        var item_id = $(this).closest('.dd-item').data('id');
+        // Optionally, send an AJAX request to delete the item from the database
+        $(this).closest('.dd-item').remove();
+    });
+     // Add new item event
+     $(document).on('click', '.add-item', function(e) {
+        e.preventDefault();
+        // You'll need to define how new items should be structured
+        // Here's an example adding a new item at the end of the list
+        var newItemHtml = '<li class="dd-item" data-id="new">' +
+            '<div class="dd-handle">' +
+            '<input type="text" name="title[new]" placeholder="Title" />' +
+            '<input type="text" name="url[new]" placeholder="URL" />' +
+            '<button type="button" class="delete-item">Delete</button>' +
+            '</div>' +
+            '</li>';
+        $('#nestable > .dd-list').append(newItemHtml);
+    });
+
+    // Event handler for the save button
+    $('.save-btn').on('click', function(e) {
+        e.preventDefault();
+
+        var menuData = $('#nestable').nestable('serialize');
+        var itemDetails = {};
+        $('#nestable input[type="text"]').each(function() {
+            var inputName = $(this).attr('name');
+            var inputValue = $(this).val();
+            var itemId = $(this).closest('.dd-item').data('id');
+            if (!itemDetails[itemId]) {
+                itemDetails[itemId] = {};
+            }
+            itemDetails[itemId][inputName] = inputValue;
+        });
+
+        var postData = {
+            structure: menuData,
+            details: itemDetails
+        };
+        
+
+        // AJAX call to the server to save the menu structure
+        $.ajax({
+            url: 'save_menu_structure.php', // Make sure this points to your PHP script that handles saving
+            type: 'POST',
+            data: {menu: JSON.stringify(postData)},
+            success: function(response) {
+                // Parse the response here if it's JSON, or just use it as is if it's plain text
+                alert("Menu saved successfully!");
+            },
+            error: function(xhr, status, error) {
+                alert("An error occurred while saving the menu: " + error);
+            }
+        });
+    });
+});
+</script>
+
+
+
+
+<iframe style="display: none;" src="./Menu Editor_files/saved_resource.html"></iframe><hv-copy-modal><template shadowrootmode="open"><link href="chrome-extension://bbpokcagpggnekcmamgdieebhpkjmljm/css/global.css" rel="stylesheet" type="text/css"><style>
+        div {
+            position: fixed;
+            z-index: 5000000000;
+            right: 16px;
+            bottom: -100%;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            color: #43a047;
+            background: rgb(25, 25, 31);
+            border-radius: 0.2rem;
+            font-weight: 700;
+            transform: scale(0);
+            transition: bottom 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        div svg {
+            margin-right: 1rem;
+        }
+
+        div.active {
+            bottom: 16px;
+            transform: scale(1);
+        }
+    </style><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg> <span>Copied</span></div></template></hv-copy-modal></body></html>

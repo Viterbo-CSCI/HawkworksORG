@@ -7,13 +7,18 @@ body {
 }
 
 
-/* Heading Styles */
-h1, h2, h3 {
-    font-family: 'Latto', Helvetica; /* Stylish, modern font for headings */
-    font-weight: 500; /* Bold font weight for headings */
+* Heading Styles */
+h1, h2 {
+    font-family: 'Lato', Helvetica, sans-serif;
+    font-weight: 00;
+    text-transform: uppercase;
 }
 
-
+h3 {
+    font-family: 'Lato', Helvetica, sans-serif;
+    font-weight: 300;
+    text-transform: capitalize;
+}
 /* Logged in Styles */
 .logged-in .editable-block {
     border: 2px solid #4a90e2; /* Example: blue border for editable blocks */
@@ -114,6 +119,7 @@ body.pg_1 {
 .jumbotron .display-4 {
     font-size: 2.5rem; /* Adjust as necessary */
     color: #333; /* Color for the title */
+    text-transform: capitalize;
 }
 
 .jumbotron .lead {
@@ -144,7 +150,7 @@ body.pg_1 .img-fluid {
 }
 
 body.pg_1 .ic_sec i{
-    color: #0056b3; 
+    color: #be2e4e; 
 }
 
 #imageUploadModal .img-thumbnail {
@@ -156,12 +162,22 @@ body.pg_1 .ic_sec i{
 
 
 /* Footer Styles */
+footer .logo {
+    max-width: 200px;
+    margin-bottom: 20px; /* Space below the logo */
+}
 /* Logged in Styles */
 .logged-in .editable-block {
     border: 2px solid #4a90e2; /* Example: blue border for editable blocks */
     position: relative;
     padding: 10px;
     margin-bottom: 20px;
+}
+footer .logo {
+    font-size: 1.5rem; /* Adjust the logo size */
+    font-weight: bold; /* Bold font weight */
+    color: #333; /* Dark grey color for the logo */
+    margin-bottom: 20px; /* Space below the logo */
 }
 
 .logged-in .editable-block::before {
@@ -282,10 +298,11 @@ body.pg_1 .img-fluid {
     width: 100%;
     height: auto;
     display: block; /* remove any extra space below the image */
+    height: 350px;
 }
 
 body.pg_1 .ic_sec i{
-    color: #0056b3; 
+    color: #bc324f;
 }
 
 #imageUploadModal .img-thumbnail {
@@ -295,7 +312,9 @@ body.pg_1 .ic_sec i{
     margin-bottom: 10px;
     
 }
-
+.accent{
+    color:#bc324f;
+}
 
 
 .contact-button {
@@ -327,6 +346,7 @@ body.pg_1 .ic_sec i{
 .jumbotron .display-4 {
     font-size: 3rem; /* Increase the font size for larger displays */
     margin-bottom: 2rem; /* Add more space below the title */
+    text-transform: uppercase; /* Uppercase the title */
     /* Other styles */
 }
 
@@ -444,7 +464,7 @@ body.pg_1 .ic_sec i{
     100% { background-position: 100% 100%; }
 }
 .section-wrapper {
-    position: relative;
+    position: relative; 
 }
 
 .section-wrapper {
@@ -480,4 +500,140 @@ body.pg_1 .ic_sec i{
     top: 0;
     right: 0;
     z-index: 999; /* Adjust the z-index value as needed */
+}
+/* Hide the SVG on screens less than 768 pixels wide */
+@media (max-width: 767px) {
+    .overlay-svg {
+      display: none;
+    }
+    .co-found-section2 {
+        background-color: #fff !important;
+    }
+
+  }
+  /* CKEditor content area styling */
+.accent-text {
+    color:#bc324f;; /* Your accent color */
+}
+
+/* Bootstrap button styling for links */
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+        touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+/* Specific Bootstrap button style */
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+/* You may need to adjust the styling if it is applied within the CKEditor content area */
+/* Apply styles only when the body has the 'pg_story' class */
+body.pg_story .story-header,
+body.pg_story .story-content,
+body.pg_story .story-footer {
+    background-color: #0056b3; /* Example color - adjust as needed */
+    padding: 2rem 0; /* Add padding for visual spacing */
+    color: white; /* Set text color for these sections */
+}
+
+body.pg_story .container {
+    width: 100%;
+    max-width: 1200px; /* Adjust as needed for your design */
+    margin: auto; /* Center the container */
+    padding: 0 15px; /* Add padding to maintain spacing from the edge */
+}
+
+/* Text alignment and styling for the header */
+body.pg_story .story-header .container {
+    text-align: center; /* Center the text within the container */
+}
+
+/* The story content section should have a white background */
+body.pg_story .story-content {
+    background-color: white; /* White background for the content */
+    color: black; /* Set text color for the content */
+}
+
+/* Text alignment and styling for the footer */
+body.pg_story .story-footer {
+    background-color: #333; /* Dark background for the footer */
+}
+
+/* Ensure button and text colors are appropriate for the dark background */
+body.pg_story .story-footer .btn-primary {
+    color: white;
+    background-color: #007bff; /* Bootstrap primary color */
+    border-color: #007bff;
+}
+
+body.pg_story .story-footer .footer-text {
+    color: white; /* Set footer text color for readability */
+}
+
+/* Add additional styles as needed, specific to pg_story class */
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  /* Use flexbox on the body to create a column layout that pushes the footer to the bottom */
+  body.pg_story {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Minimum height of 100% of the viewport height */
+  }
+
+
+
+
+/* Ensure Bootstrap's button styles are applied */
+.link-as-button {
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+}
+
+.link-as-button:hover, .link-as-button:focus {
+    background-color: #0056b3;
+    color: white;
+}
+/* Apply padding to all sections in the story page */
+body.pg_story header.story-header,
+body.pg_story section.story-content,
+body.pg_story footer.story-footer {
+    padding: 3rem 0; /* This adds padding to the top and bottom of each section */
+}
+
+/* Add horizontal padding to the container for the content to not touch the screen edges on smaller devices */
+body.pg_story .container:not(.navbar-container) {
+    padding: 4rem 0; /* This adds padding to the top and bottom of each section */
+    padding-left: 15px;
+    padding-right: 15px;
 }

@@ -7,12 +7,11 @@ error_reporting(E_ALL);
 
 session_start();
 require_once 'db.php';
-//require_once 'HTMLPurifier.auto.php'; // Make sure to include the HTMLPurifier library
-
+require __DIR__ . '/../vendor/autoload.php';
 header('Content-Type: application/json');
 
-//$config = HTMLPurifier_Config::createDefault();
-//$purifier = new HTMLPurifier($config);
+$config = HTMLPurifier_Config::createDefault();
+$purifier = new HTMLPurifier($config);
 
 try {
     if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
@@ -21,8 +20,8 @@ try {
 
     $blockId = $_POST['block_id'] ?? null;
     // Use HTMLPurifier to clean the content, instead of escaping it with htmlspecialchars.
-    //$content = isset($_POST['content']) ? $purifier->purify($_POST['content']) : null;
-    $content = $_POST['content'] ?? null;
+    $content = isset($_POST['content']) ? $purifier->purify($_POST['content']) : null;
+    //$content = $_POST['content'] ?? null;
     if (!$blockId) {
         throw new Exception('Block ID is missing');
     }
