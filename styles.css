@@ -637,3 +637,11 @@ body.pg_story .container:not(.navbar-container) {
     padding-left: 15px;
     padding-right: 15px;
 }
+.story-footer
+{
+    background-image: ;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    height: 500px;
+}

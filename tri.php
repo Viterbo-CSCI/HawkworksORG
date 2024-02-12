@@ -33,7 +33,7 @@ require_once 'header.php'; // Include the header
         <?php if ($editMode): ?>
             <!-- Editable title element -->
             <div id="title_<?php echo $storyBlockId; ?>" class="editable-block" contenteditable="true">
-                <?php echo(render_title($storyBlockId)); ?>
+               <h1> <?php echo(render_title($storyBlockId)); ?></h1>
             </div>
             <!-- Save button for the title -->
             <button class="save-btn" onclick="update_title(<?php echo $storyBlockId; ?>, $('#title_<?php echo $storyBlockId; ?>').text())">Save Title</button>
@@ -56,7 +56,6 @@ require_once 'header.php'; // Include the header
         </div>
     </div>
 </section>
-<!-- Story Footer with full-width background -->
 <footer class="story-footer">
     <div class="container text-center">
         <p class="footer-text">We're ready to talk...</p>
@@ -64,7 +63,13 @@ require_once 'header.php'; // Include the header
         <a class="btn btn-primary" href="contact.php" role="button">Get in Touch</a>
     </div>
 </footer>
-
+<footer class="story-footer" style="background-image: url('/imgs/gallery2.png'); background-attachment: fixed; background-position: center; background-size: cover;">
+    <div class="container text-center">
+        <p class="footer-text">We're ready to talk...</p>
+        <p>Wherever you are on your startup journey, get in touch and let's unpack your thinking together and see where we can help turn your idea into a reality.</p>
+        <a class="btn btn-primary" href="contact.php" role="button">Get in Touch</a>
+    </div>
+</footer>
 <?php
 require_once 'footer.php'; // Include the footer
 ?>
